@@ -1,20 +1,25 @@
 document.addEventListener('click', (e) => {
-  // Salva a posição do clique antes da resposta chegar
   const posX = e.pageX;
   const posY = e.pageY;
 
   chrome.runtime.sendMessage({ action: "getRandomPokemon" }, (response) => {
     if (response && response.imgUrl) {
-      const img = document.createElement('img');
+      const img = new Image(); // Cria um objeto de imagem primeiro
       img.src = response.imgUrl;
       img.classList.add('poke-click');
       
-      // Centraliza no clique
-      img.style.left = `${posX - 40}px`;
-      img.style.top = `${posY - 40}px`;
+      // Centraliza melhor (ajustado para os 100px do novo CSS)
+      img.style.left = `${posX - 50}px`;
+      img.style.top = `${posY - 50}px`;
       
-      document.body.appendChild(img);
-      setTimeout(() => img.remove(), 2000);
+      // Só coloca na tela quando a imagem terminar de baixar
+      img.onload = () => {
+        document.body.appendChild(img);
+        setTimeout(() => {
+          img.style.opacity = '0';
+          setTimeout(() => img.remove(), 400);
+        }, 2000);
+      };
     }
   });
 });

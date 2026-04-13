@@ -1,14 +1,35 @@
 .poke-click {
+  /* Força a posição absoluta ignorando estilos do site */
   position: absolute !important;
-  width: 80px !important;
-  height: 80px !important;
-  z-index: 2147483647 !important; /* Valor máximo de z-index */
+  display: block !important;
+  
+  /* Tamanho garantido */
+  width: 100px !important; 
+  height: 100px !important;
+  
+  /* Z-index máximo para ficar na frente de TUDO */
+  z-index: 2147483647 !important; 
+  
+  /* Evita que o clique do mouse interaja com o Pokémon */
   pointer-events: none !important;
+  
+  /* Estilo da imagem */
   image-rendering: pixelated;
-  animation: pop 0.3s ease-out;
+  
+  /* Filtro de sombra para dar contraste em fundos brancos */
+  filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.2));
+  
+  /* Animação */
+  animation: pokePop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-@keyframes pop {
-  0% { transform: scale(0); }
-  100% { transform: scale(1); }
+@keyframes pokePop {
+  0% { 
+    transform: scale(0) rotate(-10deg); 
+    opacity: 0;
+  }
+  100% { 
+    transform: scale(1) rotate(0deg); 
+    opacity: 1;
+  }
 }
