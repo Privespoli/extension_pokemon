@@ -1,21 +1,14 @@
 .poke-click {
-  position: absolute;
-  width: 80px; /* Tamanho do sprite */
-  height: 80px;
-  z-index: 999999;
-  pointer-events: none;
-  image-rendering: pixelated; /* Mantém o estilo retrô dos sprites */
-  transition: opacity 0.5s ease;
-  animation: spawn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: absolute !important;
+  width: 80px !important;
+  height: 80px !important;
+  z-index: 2147483647 !important; /* Valor máximo de z-index */
+  pointer-events: none !important;
+  image-rendering: pixelated;
+  animation: pop 0.3s ease-out;
 }
 
-@keyframes spawn {
-  0% { 
-    transform: scale(0) translateY(20px); 
-    opacity: 0;
-  }
-  100% { 
-    transform: scale(1) translateY(0); 
-    opacity: 1;
-  }
+@keyframes pop {
+  0% { transform: scale(0); }
+  100% { transform: scale(1); }
 }
